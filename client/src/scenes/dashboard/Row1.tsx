@@ -16,34 +16,13 @@ const Row1 = (props: Props) => {
 
     const { data } = useGetKpisQuery();
 
-    const revenueExpense = useMemo(() => {
+    const modifiedData = useMemo(() => {
         return (data && data[0].monthlyData.map(({ month, revenue, expenses }) => {
             return {
                 name: month.substring(0, 3), // Jan, Feb
                 revenue,
-                expenses
-            }
-        }))
-    }, [data]);
-
-
-    const revenueProfit = useMemo(() => {
-        return (data && data[0].monthlyData.map(({ month, revenue, expenses }) => {
-            return {
-                name: month.substring(0, 3), // Jan, Feb
-                revenue,
+                expenses,
                 profit: (revenue - expenses).toFixed(2)
-            }
-        }))
-    }, [data]);
-
-
-
-    const revenue = useMemo(() => {
-        return (data && data[0].monthlyData.map(({ month, revenue, expenses }) => {
-            return {
-                name: month.substring(0, 3), // Jan, Feb
-                revenue,
             }
         }))
     }, [data]);
@@ -62,7 +41,7 @@ const Row1 = (props: Props) => {
                     <AreaChart
                         width={500}
                         height={400}
-                        data={revenueExpense}
+                        data={modifiedData}
                         margin={{
                             top: 15,
                             right: 20,
@@ -171,7 +150,7 @@ const Row1 = (props: Props) => {
                     sideText='+4%' />
                 <ResponsiveContainer width="100%" height="100%">
                     <LineChart
-                        data={revenueProfit}
+                        data={modifiedData}
                         margin={{
                             top: 20,
                             right: 0,
@@ -246,7 +225,7 @@ const Row1 = (props: Props) => {
                     <BarChart
                         width={500}
                         height={300}
-                        data={revenue}
+                        data={modifiedData}
                         margin={{
                             top: 17,
                             right: 15,

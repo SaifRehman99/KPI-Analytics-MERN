@@ -5,8 +5,11 @@ import helmet from "helmet";
 import morgan from "morgan";
 import mongoose from "mongoose";
 import kpisRoutes from "./routes/kpi.js";
-import { kpis } from "./data/data.js";
+import productsRoutes from "./routes/products.js";
+import Product from "./models/Product.js";
 import KPI from "./models/KPI.js";
+
+import { kpis, products } from "./data/data.js";
 
 /* CONFIGURATION */
 dotenv.config({});
@@ -19,6 +22,7 @@ app.use(morgan("common"));
 
 /* ROUTES */
 app.use("/kpi", kpisRoutes);
+app.use("/product", productsRoutes);
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 9000;
@@ -34,6 +38,7 @@ mongoose
         // before seed, drop current db, so no duplicate
         // await mongoose.connection.db.dropDatabase();
         // KPI.insertMany(kpis);
+        // Product.insertMany(products);
     })
     .catch((error) => {
         console.log(`${error} didn't connect`);

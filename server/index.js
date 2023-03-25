@@ -4,6 +4,9 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import mongoose from "mongoose";
+import kpisRoutes from "./routes/kpi.js";
+import { kpis } from "./data/data.js";
+import KPI from "./models/KPI.js";
 
 /* CONFIGURATION */
 dotenv.config({});
@@ -13,6 +16,9 @@ app.use(cors());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
+
+/* ROUTES */
+app.use("/kpi", kpisRoutes);
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 9000;
@@ -24,6 +30,10 @@ mongoose
     })
     .then(async () => {
         app.listen(PORT, () => console.log("listening on port " + PORT));
+
+        // before seed, drop current db, so no duplicate
+        // await mongoose.connection.db.dropDatabase();
+        // KPI.insertMany(kpis);
     })
     .catch((error) => {
         console.log(`${error} didn't connect`);

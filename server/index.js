@@ -23,6 +23,10 @@ app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 
+app.get("/", (req, res) => {
+    res.send("Express on Vercel");
+});
+
 /* ROUTES */
 app.use("/kpi", kpisRoutes);
 app.use("/product", productsRoutes);

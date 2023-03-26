@@ -1,4 +1,4 @@
-# Job Finder using React Native
+# KPI Indicators Charts
 ![MERN](https://i.ibb.co/F3YdLHW/Screenshot-2023-03-26-061424.png)
 
 ## Key Features
